@@ -12,7 +12,7 @@ namespace OrderApp.WebAPI.Controllers
     public class UserController : BaseController
     {
         private readonly IRepository<User> _repository;       
-        public UserController(IRepository<User> repository, ILogger logger):base(logger) 
+        public UserController(IRepository<User> repository, ILogger <UserController> logger):base(logger) 
         {
             _repository = repository;
         }

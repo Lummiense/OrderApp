@@ -13,9 +13,11 @@ namespace OrderApp.WebAPI.Controllers
     public class OrderController : BaseController
     {
         private readonly IRepository<Order> _repository;
-        public OrderController(IRepository<Order> repository,ILogger<OrderController> logger):base(logger)
+        private readonly IOrderService _orderService;        
+        public OrderController(IRepository<Order> repository,IOrderService orderService, ILogger<OrderController> logger):base(logger)
         {
             _repository = repository;
+            _orderService = orderService;           
         }
         /// <summary>
         /// Добавить новый заказ в базу данных.
@@ -23,16 +25,16 @@ namespace OrderApp.WebAPI.Controllers
         /// <param name="order">Экземпляр заказа.</param>
         /// <returns>id созданного заказа.</returns>
         [HttpPost("Add")]
-        public async Task<ActionResult<string>> CreateNewOrder(Order order)
-        {
-            order.Id = Guid.NewGuid().ToString();
+        public async Task<ActionResult<string>> CreateNewOrder(string userId,Dictionary<string,int> items)
+        {        
+            var order =await _orderService.CreateOrder(userId, items);
             try
             {
                 await _repository.AddAsync(order);
             }
             catch (Exception ex) 
             {
-                _logger.LogError(ex, "Создать заказ не удалось.");
+                _logger.LogError(ex, ex.Message);
                 throw;
             }
             return Ok(order.Id);
@@ -50,7 +52,7 @@ namespace OrderApp.WebAPI.Controllers
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex, "Внести изменения в заказ не удалось.");
+                _logger.LogError(ex, ex.Message);
                 throw;
             }
             return Ok("Изменения в заказ внесены.");
@@ -68,7 +70,7 @@ namespace OrderApp.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Удалить заказ не удалось.");
+                _logger.LogError(ex, ex.Message);
                 throw;
             }
             return Ok("Заказ удалён.");

@@ -1,37 +1,37 @@
 CREATE TABLE [Product] (
-  [id] string PRIMARY KEY,
-  [Name] string,
+  [id] nvarchar(50) PRIMARY KEY,
+  [Name] nvarchar(35),
   [Price] float
 )
 GO
 
 CREATE TABLE [User] (
-  [id] string PRIMARY KEY,
-  [RoleId] string,
-  [Name] string,
-  [Login] string,
-  [Password] string
+  [id] nvarchar(50) PRIMARY KEY,
+  [RoleId] nvarchar(50),
+  [Name] nvarchar(35),
+  [Login] nvarchar(35),
+  [Password] nvarchar(35)
 )
 GO
 
 CREATE TABLE [Role] (
-  [id] string PRIMARY KEY,
-  [Name] string
+  [id] nvarchar(50) PRIMARY KEY,
+  [Name] nvarchar(35)
 )
 GO
 
 CREATE TABLE [Order] (
-  [id] string PRIMARY KEY,
-  [UserId] string,
-  [Order_Date] string,
+  [id] nvarchar(50) PRIMARY KEY,
+  [UserId] nvarchar(50),
+  [Order_Date] datetime,
   [Total_Order_Price] float
 )
 GO
 
 CREATE TABLE [OrderItem] (
-  [id] string PRIMARY KEY,
-  [ProductId] string,
-  [OrderId] string,
+  [id] nvarchar(50) PRIMARY KEY,
+  [ProductId] nvarchar(50),
+  [OrderId] nvarchar(50),
   [Item_Count] int,
   [Price] float
 )

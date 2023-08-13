@@ -15,7 +15,7 @@ public partial class Order:BaseEntity
     /// <summary>
     /// Дата заказа.
     /// </summary>
-    public string? OrderDate { get; set; }
+    public DateTime? OrderDate { get; set; }
     /// <summary>
     /// Общая сумма заказа.
     /// </summary>

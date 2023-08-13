@@ -32,7 +32,7 @@ namespace OrderApp.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Добавить товар не удалось.");
+                _logger.LogError(ex, ex.Message);
                 throw;
             }
             return Ok(product.Id);
@@ -50,7 +50,7 @@ namespace OrderApp.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Изменить данные товара не удалось.");
+                _logger.LogError(ex, ex.Message);
                 throw;
             }
             return Ok("Данные товара изменены.");
