@@ -12,7 +12,6 @@ namespace OrderApp.Client.ViewModels
     /// </summary>
     internal class MainWindowViewModel:ViewModel
     {
-
         private string _title ="Заказы";
         /// <summary>
         /// Заголовок окна.
