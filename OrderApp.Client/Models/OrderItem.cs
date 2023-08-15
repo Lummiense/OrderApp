@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace OrderApp.Client.Models
 {
-    internal class OrderItem : BaseEntity
+    internal class OrderItem
     {
+        /// <summary>
+        /// ID позиции в заказе.
+        /// </summary>
+        public string? Id { get; set; }
         /// <summary>
         /// id товара.
         /// </summary>

@@ -6,24 +6,15 @@
         xmlns:local="clr-namespace:OrderApp.Client"
         xmlns:vm="clr-namespace:OrderApp.Client.ViewModels"
         mc:Ignorable="d"
-        Title="{Binding Path=Title}" Height="450" Width="800">
+        Title="{Binding Path=Title}">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" Header="Заказы">
-
-        </GroupBox>
-        <GroupBox Grid.Column="1" Header="Информация о заказе">
-            <DataGrid>
-                
-            </DataGrid>
-        </GroupBox>
-        <Button Content="Создать заказ" HorizontalAlignment="Center" Height="39" Margin="0,369,0,0" VerticalAlignment="Top" Width="142"/>
-        <Button Content="Получить файл списка заказов" HorizontalAlignment="Left" Height="39" Margin="371,369,0,0" VerticalAlignment="Top" Width="142" Grid.Column="1"/>
+        <DataGrid ItemsSource="{Binding Path=OrderCollection}">
+            
+        </DataGrid>
+        <Button Content="Создать заказ" HorizontalAlignment="Left" Height="39" Margin="27,364,0,0" VerticalAlignment="Top" Width="142"/>
+        <Button Content="Получить файл списка заказов" HorizontalAlignment="Left" Height="39" Margin="582,364,0,0" VerticalAlignment="Top" Width="192"/>
     </Grid>
 </Window>

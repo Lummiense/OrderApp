@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Identity;
+using Microsoft.EntityFrameworkCore;
 using OrderApp.Domain.Data;
 using OrderApp.Domain.Entities;
 using OrderApp.Services.Interfaces;
@@ -50,20 +51,14 @@ namespace OrderApp.Services.Implementation
         /// <returns>Сущность данного типа.</returns>
         public async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includeProperties)
         {
-            IQueryable<T> query = _dbSet;
+            IQueryable<T> query = _dbSet.Where(filter);
 
-            if (includeProperties != null)
-            {
-                foreach (var includeProperty in includeProperties)
-                {
-                    query = query.Include(includeProperty);
-                }
-            }
-            var entity = await query.FirstOrDefaultAsync(filter);
+            //TODO: разобраться с include
+            /*var entity = await query.AsNoTracking().Include().FirstOrDefaultAsync(filter);
             if (entity == null)
             {
                 throw new ArgumentNullException("Такого пользователя не существует");
-            }
+            }*/
             return entity;
         }
         /// <summary>

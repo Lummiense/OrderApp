@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace OrderApp.Client.Models
 {
-    internal class Role:BaseEntity
+    internal class Role
     {
+        /// <summary>
+        /// ID роли.
+        /// </summary>
+        public string? Id { get; set; }
         /// <summary>
         /// Название роли.
         /// </summary>

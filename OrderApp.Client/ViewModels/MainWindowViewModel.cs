@@ -15,6 +15,7 @@ namespace OrderApp.Client.ViewModels
     /// </summary>
     internal class MainWindowViewModel:ViewModel
     {
+        public ObservableCollection<Order> OrderCollection { get; }
         #region Свойства элементов окна
         private string _title ="Заказы";
         /// <summary>
@@ -44,7 +45,7 @@ namespace OrderApp.Client.ViewModels
             set => Set(ref _newOrder, value);
         }
         #endregion
-        private Order _selectedOrder;
+       /* private Order _selectedOrder;
         /// <summary>
         /// Получение выбранного заказа.
         /// </summary>
@@ -53,14 +54,18 @@ namespace OrderApp.Client.ViewModels
             get => _selectedOrder;
             set => Set(ref _selectedOrder, value);
         }
-
+*/
         public MainWindowViewModel()
         {
-            var i = 1;
-           /* //var orders = Enumerable.Select();
-            var Orders = new ObservableCollection<Order>(orders);*/
 
-            
+            var orders = Enumerable.Range(1,OrderCollection.Count).Select(i => new Order
+            {
+                Id = i.ToString(),
+                OrderDate = Convert.ToDateTime(i),
+                TotalOrderPrice = Convert.ToDouble(i),
+            });
+
+             OrderCollection = new ObservableCollection<Order>(orders);
         }
     }
 }
