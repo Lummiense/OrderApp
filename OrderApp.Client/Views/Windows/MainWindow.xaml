@@ -12,15 +12,18 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="95*"/>
-            <ColumnDefinition Width="21*"/>
-            <ColumnDefinition Width="684*"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="28" Margin="58,34,0,0" VerticalAlignment="Top" Width="72" Grid.ColumnSpan="4"/>
-        <Button Content="Создать заказ" HorizontalAlignment="Left" Height="39" Margin="54,359,0,0" VerticalAlignment="Top" Width="142" Grid.ColumnSpan="4"/>
-        <Button Grid.Column="3" Content="Получить файл&#xD;&#xA;списка заказов" HorizontalAlignment="Left" Height="44" Margin="494,359,0,0" VerticalAlignment="Top" Width="141"/>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="54,75,346,217" Grid.ColumnSpan="4"/>
+        <GroupBox Grid.Column="0" Header="Заказы">
 
+        </GroupBox>
+        <GroupBox Grid.Column="1" Header="Информация о заказе">
+            <DataGrid>
+                
+            </DataGrid>
+        </GroupBox>
+        <Button Content="Создать заказ" HorizontalAlignment="Center" Height="39" Margin="0,369,0,0" VerticalAlignment="Top" Width="142"/>
+        <Button Content="Получить файл списка заказов" HorizontalAlignment="Left" Height="39" Margin="371,369,0,0" VerticalAlignment="Top" Width="142" Grid.Column="1"/>
     </Grid>
 </Window>

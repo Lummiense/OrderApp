@@ -15,6 +15,7 @@ namespace OrderApp.Client.ViewModels
     /// </summary>
     internal class LoginWindowViewModel:ViewModel
     {
+        #region Свойства элементов окна авторизации.
         private string _title = "Окно входа";
         /// <summary>
         /// Заголовок окна.
@@ -60,6 +61,6 @@ namespace OrderApp.Client.ViewModels
             get => _button;
             set => Set(ref _button, value);
         }
-        
+        #endregion
     }
 }
