@@ -53,12 +53,12 @@ namespace OrderApp.Services.Implementation
         {
             IQueryable<T> query = _dbSet.Where(filter);
 
-            //TODO: разобраться с include
-            /*var entity = await query.AsNoTracking().Include().FirstOrDefaultAsync(filter);
+
+            var entity = await query.AsNoTracking().Include(x=>includeProperties.ToString()).FirstOrDefaultAsync(filter);
             if (entity == null)
             {
                 throw new ArgumentNullException("Такого пользователя не существует");
-            }*/
+            }
             return entity;
         }
         /// <summary>
