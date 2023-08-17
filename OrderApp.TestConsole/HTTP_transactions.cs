@@ -28,12 +28,7 @@ namespace OrderApp.TestConsole
             return await response.Content.ReadAsStreamAsync();               
         }
 
-        internal static async Task<Stream> AddOrder(Order order)
-        {
-            var client = new HttpClient();
-            var response = await client.PostAsJsonAsync($"https://localhost:7158/api/Order/Add/?userId={order.UserId}", order);
-            return await response.Content.ReadAsStreamAsync();
-        }
+     
         /// <summary>
         /// Формирования потока данных с API.
         /// </summary>
