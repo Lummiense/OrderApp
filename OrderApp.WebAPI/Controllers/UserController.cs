@@ -35,7 +35,7 @@ namespace OrderApp.WebAPI.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<Order>> GetUserOrders(string id)
         {
-            var user = await _repository.GetByFilterAsync(x => x.Id == id, x => x.Orders);
+            var user = await _repository.GetByFilterAsync(x => x.Id == id, x=>x.Orders);
             return Ok(user.Orders);
         }
 

@@ -17,6 +17,17 @@ namespace OrderApp.WebAPI.Controllers
         {
             _repository = repository;
         }
+
+        /// <summary>
+        /// Получить из базы данных список всех товаров.
+        /// </summary>
+        /// <returns>Список всех товаров.</returns>
+        [HttpGet()]
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
+        {
+            var products = await _repository.GetAllAsync();
+            return Ok(products);
+        }
         /// <summary>
         /// Добавить в базу новый товар.
         /// </summary>

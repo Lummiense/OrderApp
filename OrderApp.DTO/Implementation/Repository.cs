@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Identity;
+using Microsoft.EntityFrameworkCore;
 using OrderApp.Domain.Data;
 using OrderApp.Domain.Entities;
 using OrderApp.Services.Interfaces;
@@ -41,17 +42,29 @@ namespace OrderApp.Services.Implementation
         {
             await _dbSet.AddRangeAsync(entities);
             await SaveChangesAsync();
-        }        
+        }
+        /// <summary>
+        /// Получить список всех сущностей типа из базы данных.
+        /// </summary>
+        /// <returns>Коллекция сущностей.</returns>
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+           var entities =await _dbSet.AsNoTracking().ToListAsync();
+            if(entities==null)
+            {
+                throw new ArgumentNullException("Сущности с такими параметрами не существуют");
+            }
+           return entities;
+        }
         /// <summary>
         /// Получить сущность из базы данных с приминением фильтра.
         /// </summary>
         /// <param name="filter">Условие поиска в базе данных.</param>
         /// <param name="includeProperties">Опция загрузки данных из связанных таблиц.</param>
         /// <returns>Сущность данного типа.</returns>
-        public async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includeProperties)            
         {
-            IQueryable<T> query = _dbSet;
-
+            IQueryable<T> query = _dbSet.Where(filter);
             if (includeProperties != null)
             {
                 foreach (var includeProperty in includeProperties)
@@ -59,11 +72,11 @@ namespace OrderApp.Services.Implementation
                     query = query.Include(includeProperty);
                 }
             }
-            var entity = await query.FirstOrDefaultAsync(filter);
+            var entity = await query.AsNoTracking().FirstOrDefaultAsync(filter);
             if (entity == null)
             {
-                throw new ArgumentNullException("Такого пользователя не существует");
-            }
+                throw new ArgumentNullException("Сущности с такими параметрами не существует");
+    }
             return entity;
         }
         /// <summary>
@@ -76,7 +89,7 @@ namespace OrderApp.Services.Implementation
             var entity = await _dbSet.Where(filter).FirstOrDefaultAsync();
             if (entity == null) 
             {
-                throw new ArgumentNullException("Сущности с такими параметрами не существует");
+              throw new ArgumentNullException("Сущности с такими параметрами не существует");
             }
             _dbSet.Remove(entity);
             await SaveChangesAsync();
@@ -95,7 +108,40 @@ namespace OrderApp.Services.Implementation
         public async Task UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
-            await SaveChangesAsync();
+            #region Обработка конфликта параллелизма
+            var saved = false;
+            while (!saved)
+            {
+                try
+                {
+                    _dataContext.SaveChanges();
+                    saved = true;
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    foreach (var entry in ex.Entries)
+                    {
+                        if (entry.Entity is T)
+                        {
+                            var proposedValues = entry.CurrentValues;
+                            var databaseValues = entry.GetDatabaseValues();
+
+                            foreach (var property in proposedValues.Properties)
+                            {
+                                var proposedValue = proposedValues[property];
+                                var databaseValue = databaseValues[property];                                
+                            }
+
+                            entry.OriginalValues.SetValues(databaseValues);
+                        }
+                        else
+                        {
+                            throw new NotSupportedException(entry.Metadata.Name);
+                        }
+                    }
+                }
+            }
+            #endregion
         }
     }
 }

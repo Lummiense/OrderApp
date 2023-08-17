@@ -13,7 +13,12 @@ namespace OrderApp.Services.Interfaces
     /// </summary>
     /// <typeparam name="T">Базовая сущность.</typeparam>
     public interface IRepository<T> where T : BaseEntity
-    {        
+    {
+        /// <summary>
+        /// Получить список всех сущностей типа из базы данных.
+        /// </summary>
+        /// <returns>Коллекция сущностей.</returns>
+        Task<IEnumerable<T>> GetAllAsync();
         /// <summary>
         /// Получить сущность из базы данных по фильтру.
         /// </summary>
