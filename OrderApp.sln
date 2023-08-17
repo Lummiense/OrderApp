@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApp.WebAPI", "OrderApp
 		{EF7BECEB-BE7C-4999-9374-6D48935EE13C} = {EF7BECEB-BE7C-4999-9374-6D48935EE13C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApp.Client", "OrderApp.Client\OrderApp.Client.csproj", "{EA25A12A-7964-4C5E-B699-C8E89751BA7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApp.Client", "OrderApp.Client\OrderApp.Client.csproj", "{EA25A12A-7964-4C5E-B699-C8E89751BA7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApp.TestConsole", "OrderApp.TestConsole\OrderApp.TestConsole.csproj", "{3EF41CF4-25A6-4910-BD6F-2BA9A3C06D93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{EA25A12A-7964-4C5E-B699-C8E89751BA7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA25A12A-7964-4C5E-B699-C8E89751BA7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA25A12A-7964-4C5E-B699-C8E89751BA7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF41CF4-25A6-4910-BD6F-2BA9A3C06D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF41CF4-25A6-4910-BD6F-2BA9A3C06D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF41CF4-25A6-4910-BD6F-2BA9A3C06D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF41CF4-25A6-4910-BD6F-2BA9A3C06D93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
